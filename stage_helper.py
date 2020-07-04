@@ -8,8 +8,6 @@ import config_writer
 import re
 import time
 
-bg_dir = os.path.expanduser("F:\SMBCustomLevelStuff\\bgtool\\bgfiles")
-
 
 def get_file(path, extension, override=False):
     """
@@ -617,7 +615,8 @@ def replace_stage_files(s_name, s_number, stages_dir, iso_dir):
     """
     stages_dir = os.path.expanduser(stages_dir)
     stage_dir = os.path.join(stages_dir, s_name)
-    iso_stages_dir = os.path.expanduser(os.path.join(iso_dir, "root//stage"))
+    stage_dir_iso = os.path.expanduser((os.path.join("root", "stage")))
+    iso_stages_dir = os.path.expanduser(os.path.join(iso_dir, stage_dir_iso))
 
     src_lz = os.path.join(stage_dir, "STAGE{}.lz".format(s_number))
     src_gma = os.path.join(stage_dir, "st{}.gma".format(s_number))
@@ -643,6 +642,8 @@ def replace_stage_files(s_name, s_number, stages_dir, iso_dir):
     dst_lz = os.path.join(iso_stages_dir, "STAGE{}.lz".format(s_number))
     dst_gma = os.path.join(iso_stages_dir, "st{}.gma".format(s_number))
     dst_tpl = os.path.join(iso_stages_dir, "st{}.tpl".format(s_number))
+
+    print(src_lz, dst_lz)
 
     shutil.copyfile(src_lz, dst_lz)
     shutil.copyfile(src_gma, dst_gma)
